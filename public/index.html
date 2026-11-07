@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reservas de salas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div>
+      <h1>Reservas de salas y laboratorios</h1>
+      <span id="conexion" class="pill">conectando…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="tarjeta">
+      <h2 id="tituloForm">Nueva reserva</h2>
+      <form id="form" class="form-reserva" novalidate>
+        <label>Sala
+          <select id="sala" required></select>
+        </label>
+        <label>Solicitante <input id="solicitante" required maxlength="80" placeholder="Nombre y apellido"></label>
+        <label>Motivo <input id="motivo" required maxlength="200" placeholder="Práctica, clase, reunión…"></label>
+        <label>Fecha <input id="fecha" type="date" required></label>
+
+        <div class="grupo" role="group" aria-labelledby="lblInicio">
+          <span id="lblInicio" class="etiqueta">Inicio</span>
+          <div class="hora">
+            <select id="inicioHora" aria-label="Hora de inicio"></select>
+            <span>:</span>
+            <select id="inicioMin" aria-label="Minutos de inicio"></select>
+          </div>
+        </div>
+        <div class="grupo" role="group" aria-labelledby="lblFin">
+          <span id="lblFin" class="etiqueta">Fin</span>
+          <div class="hora">
+            <select id="finHora" aria-label="Hora de fin"></select>
+            <span>:</span>
+            <select id="finMin" aria-label="Minutos de fin"></select>
+          </div>
+        </div>
+
+        <div class="acciones fila-botones">
+          <button class="pri" id="guardar" type="submit">Crear reserva</button>
+          <button id="cancelarEdicion" type="button" hidden>Cancelar edición</button>
+        </div>
+      </form>
+      <div id="msgForm" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Reservas</h2>
+      <form id="filtros" class="filtros">
+        <label>Sala <select id="fSala"></select></label>
+        <label>Estado
+          <select id="fEstado">
+            <option value="">Todos</option>
+            <option value="activa">Activas</option>
+            <option value="cancelada">Canceladas</option>
+          </select>
+        </label>
+        <button type="submit" class="pri">Filtrar</button>
+        <button type="button" id="limpiar">Limpiar</button>
+      </form>
+      <div id="msgLista" role="status" aria-live="polite"></div>
+      <div class="tabla">
+        <table>
+          <thead>
+            <tr><th>Sala</th><th>Solicitante</th><th>Motivo</th><th>Horario</th><th>Estado</th><th>Adjunto</th><th>Acciones</th></tr>
+          </thead>
+          <tbody id="filas"></tbody>
+        </table>
+      </div>
+      <div class="pie">
+        <span id="resumen"></span>
+        <span class="acciones"><button id="ant" class="mini">← Anterior</button><button id="sig" class="mini">Siguiente →</button></span>
+      </div>
+    </section>
+
+    <section class="tarjeta">
+      <h2>Eventos en tiempo real</h2>
+      <ul id="eventos"><li class="vacio">Sin eventos todavía. Cualquier cambio aparecerá aquí al instante.</li></ul>
+    </section>
+  </main>
+
+  <input type="file" id="archivo" accept="application/pdf,image/png,image/jpeg" hidden>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
