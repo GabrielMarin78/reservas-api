@@ -4,15 +4,24 @@ API REST con **Node.js + Express**, persistencia en **MongoDB (Mongoose)**, carg
 
 ## Requisitos y puesta en marcha
 
-- Node.js 20 o superior y MongoDB 6+ (local o `docker compose up -d`).
+- Node.js 20 o superior y MongoDB 6+ (local o MongoDB Atlas).
 
 ```bash
 npm install
-cp .env.example .env        # opcional: PORT, MONGODB_URI, UPLOADS_DIR
-npm start                   # http://localhost:3000
+cp .env.example .env     # en PowerShell: Copy-Item .env.example .env
+npm start                # http://localhost:3000
+npm test                 # pruebas automáticas
 ```
 
-Abra `http://localhost:3000` para ver el panel de eventos en vivo.
+## Variables de entorno
+
+| Variable | Obligatoria | Descripción |
+|---|---|---|
+| `NODE_ENV` | No | `production` en el despliegue: exige `MONGODB_URI`. |
+| `PORT` | No | Puerto HTTP. En Railway lo asigna la plataforma: no se define. |
+| `MONGODB_URI` | En producción | Cadena de conexión de MongoDB (Atlas). Nunca se sube al repositorio. |
+| `CORS_ORIGINS` | En producción | Orígenes del front permitidos, separados por comas. |
+| `UPLOADS_DIR` | No | Carpeta de adjuntos. En producción, apuntar a un volumen persistente. |
 
 ## Reglas del dominio
 

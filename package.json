@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "API REST para gestionar reservas de salas y laboratorios (Node.js, Express, MongoDB, Socket.io)",
   "main": "src/server.js",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
@@ -11,8 +13,11 @@
   },
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
     "express": "^4.21.2",
     "express-validator": "^7.2.0",
+    "helmet": "^8.3.0",
     "mongoose": "^8.9.0",
     "multer": "^2.0.0",
     "socket.io": "^4.8.1"
